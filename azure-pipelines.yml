@@ -5,17 +5,23 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
+
 - stage: Build
   jobs:
   - job: BuildJob
     steps:
-    - script: echo "Build Successful"
-      displayName: 'Build'
+    - script: echo "Building Application"
 
 - stage: Deploy
   dependsOn: Build
   jobs:
   - job: DeployJob
     steps:
-    - script: echo "Deployment Successful"
-      displayName: 'Deploy'
+    - script: echo "Deploying Application"
+
+- stage: Verification
+  dependsOn: Deploy
+  jobs:
+  - job: VerifyJob
+    steps:
+    - script: echo "Verification Successful"
